@@ -25,12 +25,20 @@ def chooseSpot(board):
     position = 0
     while position not in [1,2,3,4,5,6,7,8,9] and spotIsEmpty(position,board):
         position = int(input("Choose an available position from 1-9: "))
+        print("CHOSEN POSITION: ",position)
+        while board[position] != '_':
+            print("spot is NOT EMPTY\n")
+            position = int(input("Choose an AVAILABLE position from 1-9: "))
+            # return position
     return position
     
 def randomSpot(board):
     position = 0
+    
     while position not in [1,2,3,4,5,6,7,8,9] and spotIsEmpty(position,board):
         position = random.choice([1,2,3,4,5,6,7,8,9])
+        while board[position] != '_':
+            position = random.choice([1,2,3,4,5,6,7,8,9])
     return position
 
 def spotIsEmpty(position,board):
