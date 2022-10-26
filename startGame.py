@@ -29,7 +29,9 @@ def startGame():
                     printBoard(board)
                     print('*** UH-OH! BOARD IS FULL AND THERE IS NO WINNER ***')
                     break
-                else: current_turn = 'BOT'
+                else: 
+                    print("CURRENT TURN IS BOT\n")
+                    current_turn = 'BOT'
         else:
             printBoard(board)
             position = randomSpot(board)
