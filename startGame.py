@@ -4,7 +4,8 @@ import time
 def startGame():
     
     board = ['_']* 10
-    printBoard(board)
+    introBoard = ['*']*10
+    printBoard(introBoard)
     player_symbol, bot_symbol = chooseSymbol()
     print("PROGRAM RANDOMLY PICKS FIRST TURN ....\n")
     time.sleep(2)
@@ -34,9 +35,11 @@ def startGame():
                     break
                 else: 
                     print("BOT'S TURN TO MAKE A MOVE...\n")
+                    time.sleep(1)
                     current_turn = 'BOT'
         else:
             printBoard(board)
+            time.sleep(1)
             position = findBestMove(board,bot_symbol,player_symbol,bot_symbol)
             # print("bestMove: ",bestMove)
             # break
