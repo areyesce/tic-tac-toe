@@ -10,7 +10,6 @@ def startGame():
     print("PROGRAM RANDOMLY PICKS FIRST TURN ....\n")
     time.sleep(2)
     current_turn = randomizeFirstTurn()
-    # current_turn = 'PLAYER' #TODO: remove after testing
     print("%s GOES FIRST\n"%(current_turn))
     time.sleep(1)
     print("----- SPACES ARE MARKED AS SHOWN -----")
@@ -41,8 +40,6 @@ def startGame():
             printBoard(board)
             time.sleep(1)
             position = findBestMove(board,bot_symbol,player_symbol,bot_symbol)
-            # print("bestMove: ",bestMove)
-            # break
             # position = randomSpot(board) #TODO: remove later, or give option
             board[position] = bot_symbol
             if checkWin(board,bot_symbol):
@@ -56,5 +53,4 @@ def startGame():
                     break
                 else: current_turn = 'PLAYER'
             
-        # gameNotOver = False #TODO: remove after testing
 startGame()
