@@ -1,7 +1,10 @@
 import random
 
-#TODO: write purpose parameters return for each function
-
+""" MINIMAX FUNCTION (source: http://goo.gl/sJgv68)
+PURPOSE: backtracking algorithm used in game theory to find optimal move for player
+PARAMETERS: game board, level of current backtracking stage, whether to maximize optimal move
+RETURN: best optimal score found
+"""
 def minimax(board,depth,isMax,player_symbol,bot_symbol):
     if checkWin(board,player_symbol):
         return -10
@@ -28,8 +31,6 @@ def minimax(board,depth,isMax,player_symbol,bot_symbol):
                 board[i] = '_'
         return best
 
-""" source: http://goo.gl/sJgv68 
-return: position with optimal value """
 def findBestMove(board,symbol,player_symbol,bot_symbol):
     bestVal = -1000
     bestMove = 0
@@ -39,7 +40,7 @@ def findBestMove(board,symbol,player_symbol,bot_symbol):
             #make the move 
             board[i] = symbol
             #evaluate minimax for move
-            moveVal = minimax(board,0,True,player_symbol,bot_symbol) #TODO: check needs True
+            moveVal = minimax(board,0,False,player_symbol,bot_symbol) #TODO: check needs True
             board[i] = '_'
             #if value of current move greater than best value, update best
             if (moveVal > bestVal):
