@@ -1,4 +1,57 @@
 import random
+
+#TODO: write purpose parameters return for each function
+
+def minimax(board,depth,isMax,player_symbol,bot_symbol):
+    if checkWin(board,player_symbol):
+        return -10
+    if checkWin(board,bot_symbol):
+        return 10
+    if boardIsFull(board):
+        return 0
+    if (isMax): #maximizer's move
+        best = -1000
+        for i in range(1,10):
+            if board[i] == '_':
+                board[i] = bot_symbol
+                #call minimax recursively + choose max value
+                best = max(best, minimax(board,depth+1,not isMax,player_symbol,bot_symbol))
+                #undo the move
+                board[i] = '_'
+        return best
+    else: #minimizer's move
+        best = 1000
+        for i in range(1,10):
+            if board[i] == '_':
+                board[i] = player_symbol
+                best = min(best, minimax(board,depth+1,not isMax,player_symbol,bot_symbol))
+                board[i] = '_'
+        return best
+
+""" source: http://goo.gl/sJgv68 
+return: position with optimal value """
+def findBestMove(board,symbol,player_symbol,bot_symbol):
+    bestVal = -1000
+    bestMove = 0
+    
+    for i in range(1,10):
+        if board[i] == '_':
+            #make the move 
+            board[i] = symbol
+            #evaluate minimax for move
+            moveVal = minimax(board,0,True,player_symbol,bot_symbol) #TODO: check needs True
+            board[i] = '_'
+            #if value of current move greater than best value, update best
+            if (moveVal > bestVal):
+                bestMove = i
+                bestVal = moveVal
+    # print("The value of the best Move is :", bestVal)
+    # print()
+    return bestMove
+    
+    #go through each cell, calculate minimax function for empty cells
+    
+
 def printBoard(board):
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
     print('-----------')
@@ -10,7 +63,7 @@ def printBoard(board):
 def chooseSymbol():
     symbol = ''
     while not (symbol == 'X' or symbol == 'O'):
-        symbol = input('Welcome Tic-Tac-Toe Player.\nDo you want to be (X) or (O) ?')
+        symbol = input('~ Welcome Tic-Tac-Toe Player ~ \nDo you want to be (X) or (O) ?')
     if symbol == 'X':
         return 'X','O'
     else: return 'O', 'X'
@@ -27,7 +80,7 @@ def chooseSpot(board):
         position = int(input("Choose an available position from 1-9: "))
         print("CHOSEN POSITION: ",position)
         while board[position] != '_':
-            print("spot is NOT EMPTY\n")
+            print("space %s is NOT EMPTY, try again\n"%(position))
             position = int(input("Choose an AVAILABLE position from 1-9: "))
             # return position
     return position
